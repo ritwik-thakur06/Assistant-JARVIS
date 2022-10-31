@@ -1,26 +1,26 @@
 # PACKAGES
 import datetime
-import pyttsx3  #text-to-speech conversion library, by pip install pyttsx3 command
-import speech_recognition as sr   # for microphone input from user, by pip install speechRecognition
-#PyAudio package was also installed later,which require to take audio from microphone, by pip install PyAudio
-import wikipedia # pip install wikipedia
+import pyttsx3  #text-to-speech conversion package
+import speech_recognition as sr   # for microphone input from user
+#Install PyAudio package later on as it requires to take audio access from microphone
+import wikipedia 
 import webbrowser
 import os
 import smtplib
 
 # INITIALIZATIONS:
 
-engine = pyttsx3.init('sapi5')  # Speech Application Programming Interface(sapi), an API produced by Microsoft for speech recognition and speech synthesis
+engine = pyttsx3.init('sapi5')  
 voices = engine.getProperty('voices')
-# print(voices[0].id)   # print the name of the voice is available in system, voices[0] or voices[1]
+# print(voices[0].id)  
 engine.setProperty('voice', voices[0].id)
 
 
 # FUNCTIONS:
 
 def speak(audio):
-    engine.say(audio)  #This method may also take 2 arguments. say(text unicode, name string). text : Any text you wish to hear. name : To set a name for this speech. (optional)
-    engine.runAndWait()  #This function will make the speech audible in the system
+    engine.say(audio)  
+    engine.runAndWait()  
 
 
 def wishMe():
@@ -36,18 +36,16 @@ def wishMe():
 
 
 def takeCommand():
-    # It takes microphone input from the user and return string input
-
-    r = sr.Recognizer()  #Recognizer: represents a collection of speech recognition functionality.
-    with sr.Microphone() as source:  #Microphone: represents a physical microphone on the computer.
+    r = sr.Recognizer() 
+    with sr.Microphone() as source: 
         print("Listening...")
-        r.pause_threshold = 1  # seconds of non-speaking audio before a phrase is considered complete
+        r.pause_threshold = 1  
         audio = r.listen(source)
 
     try:
         print("Recognizing...")
         query = r.recognize_google(audio, language='en-in')
-        print(f"User said: {query}\n")   #f string writing
+        print(f"User said: {query}\n")   
 
     except Exception as e:
         # print(e)
@@ -55,8 +53,7 @@ def takeCommand():
         return "None"
     return query
 
-# Note: To access this email feature by using your Gmail account is not possible now as the less secure app access has been removed by Google, the reason is to send emails
-
+# Note: To access this email feature by using your Gmail account is not possible now, as the less secure app access has been removed by Google, which is the imp part to send emails
 def sendEmail(to, content):
     server = smtplib.SMTP('smtp.gmail.com', 587)
     server.ehlo()
@@ -68,8 +65,9 @@ def sendEmail(to, content):
 # MAIN FUNCTION:
 if __name__ == "__main__":
     #FUNCTION_CALLED:
-
-    # speak("Ritwik is a gentlemen. He always respect others. He's still waiting for someone to enter in his life. After all ritwik is a good BOY");
+    
+    #uncomment the below code
+    #speak("Ritwik is a gentlemen. He always respect others. He build this assistant to make others life easier. You can give me some more input");
 
     wishMe()
 
@@ -137,3 +135,5 @@ if __name__ == "__main__":
         elif 'bye' or 'quit' or 'shutdown' or 'shut' in query:
             speak("Bye sir! have a nice day. I'll see you later")
             exit()
+            
+      
