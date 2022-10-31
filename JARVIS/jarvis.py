@@ -92,12 +92,6 @@ if __name__ == "__main__":
         elif 'open google' in query:
             webbrowser.open("google.com")
 
-        elif 'open codewithharry' in query:
-            webbrowser.open("codewithharry.com")
-
-        elif 'open crichd' in query:
-            webbrowser.open("https://crichd.vip/web")
-
         elif 'open hotstar' in query:
             webbrowser.open("hotstar.com")
 
